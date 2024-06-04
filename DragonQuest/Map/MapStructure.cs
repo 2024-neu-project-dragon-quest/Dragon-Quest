@@ -38,7 +38,7 @@ namespace DragonQuest.Map {
                 for (int x = 0; x < this.width; x++) {
 
                     Color pixel = bitmap.GetPixel(x, y);
-                    if (pixel.R == 0 && pixel.G == 0 && pixel.G == 0) {
+                    if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0) {
 
                         colMap[x, y] = true;
                         continue;
