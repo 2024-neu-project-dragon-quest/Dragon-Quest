@@ -25,3 +25,9 @@ containers, mobs and items are ENTIDIESSSSS
 
 
 */
+
+/*
+
+note for myself: there needs to be a relation between items and mobs, as all items that are on the map and can be picked up (and also have an on-map texture) are treated as entities with no brain
+
+*/
