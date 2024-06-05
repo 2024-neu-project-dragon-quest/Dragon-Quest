@@ -13,6 +13,9 @@ namespace DragonQuest.Map {
         public string name;
         public MapStructure structure;
 
+        public List<EntityInstance> loadedEntities = new List<EntityInstance>();
+        public string[,] canvasBuffer;
+
         public Map(string path) : base(path) {
 
             this.ID = int.Parse(this.values["ID"]);
@@ -20,7 +23,15 @@ namespace DragonQuest.Map {
             
             this.structure = new MapStructure("./Assets/map/" + this.values["MapStruct"]);
 
+            // initialize canvasBuffer here...
+
         }
+
+        /*
+        
+            This class acts as the MapInstance.cs one simultaneously.
+        
+        */
 
     }
 

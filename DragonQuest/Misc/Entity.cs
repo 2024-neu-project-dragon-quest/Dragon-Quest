@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DragonQuest.Misc;
 using DragonQuest.Rendering;
+using DragonQuest.Map;
 
 namespace DragonQuest.Misc {
 
@@ -15,6 +16,7 @@ namespace DragonQuest.Misc {
         public int ID;
 
         RenderableEntity allah; // do something about this zraphy
+        // actually, this might not be necessary, im still cooking
 
         public Entity(string path) : base(path) {
 
@@ -27,6 +29,12 @@ namespace DragonQuest.Misc {
             im supposed to add somthing here but i forgor
             
             */
+
+        }
+
+        public EntityInstance LoadInstance(Map.Map map) {
+
+            return new EntityInstance(this, map);
 
         }
 
