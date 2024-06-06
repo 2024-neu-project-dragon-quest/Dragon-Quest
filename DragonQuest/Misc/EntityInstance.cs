@@ -23,7 +23,7 @@ namespace DragonQuest.Misc {
         */
 
         public Entity entity;
-        public Map.Map map;
+        public Map.Map map; // This may change if an entity switches to another map.
 
         public EntityInstance(Entity entity, Map.Map map) {
 

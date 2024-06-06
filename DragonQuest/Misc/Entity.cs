@@ -14,6 +14,7 @@ namespace DragonQuest.Misc {
 
         public string RGBID;
         public int ID;
+        public string name;
 
         RenderableEntity allah; // do something about this zraphy
         // actually, this might not be necessary, im still cooking
@@ -22,7 +23,7 @@ namespace DragonQuest.Misc {
 
             this.ID = int.Parse(values["ID"]);
             this.RGBID = values["RGBID"];
-
+            this.name = values["Name"];
 
             /*
             

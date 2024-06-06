@@ -18,6 +18,12 @@ namespace DragonQuest.Mob {
         
         */
 
+        public MobInstance(Mob mob, Map.Map map) : base(mob, map) {
+
+
+
+        }
+
     }
 
 }

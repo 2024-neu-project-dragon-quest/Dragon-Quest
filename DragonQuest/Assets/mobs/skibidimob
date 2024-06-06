@@ -1,0 +1,18 @@
+v-ID=634
+v-RGBID=255;100;0
+v-Name=Skibidi Toilet
+
+// Behaviour and AI will be changed, IDK how but it will.
+
+v-Behaviour=hostile
+v-AI=hostile-chase
+v-Damage=2-5
+v-Health=30
+v-HandItem=23
+v-Drops=2-100%;23-25%;1-2%
+
+f-MobTexture
+_O_K
+ |  
+/ \ 
+f-END
