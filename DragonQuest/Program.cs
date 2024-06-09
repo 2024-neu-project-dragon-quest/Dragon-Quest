@@ -34,5 +34,16 @@ note for myself: there needs to be a relation between items and mobs, as all ite
 
 Console.WriteLine("skibidi skibidi skibidi skibidi skibidi\n\n\n\nAMBATUKAMMMM\n\n\n\n");
 
-RandomValue rv = new RandomValue("2-6;69;45-50");
-for (int i = 0; i < 100; i++) Console.WriteLine(rv.GetInt());
+RandomValue rv = new RandomValue("2->6;69@10%;45->50@50%");
+for (int i = 0; i < 100; i++) Console.WriteLine(rv.SingleProbabilisticIntegerSelection());
+
+Console.WriteLine("erm what the sigma erm what the sigma erm what the sigma erm what the sigma erm what the sigma\n\n\n\nAMBATUKAMMMM\n\n\n\n");
+
+for (int i = 0; i < 100; i++) {
+    
+    Console.WriteLine("\n");
+    List<int> selection = rv.ProbabilisticIntegerSelection();
+    foreach (int bruh in selection) Console.WriteLine(bruh);
+    Console.WriteLine("\n");
+
+}

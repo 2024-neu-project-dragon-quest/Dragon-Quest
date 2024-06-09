@@ -24,19 +24,34 @@ namespace DragonQuest.Misc {
         */
 
         private double[][] ranges;
-        private double[][] urm;
+        private double[][] urm; // uniform range map
+        private int[] spm; // selection probability map
 
         public RandomValue(string range) {
+
+            /*
+            
+                2->10@20%;69;45->50;420@69%
+            
+            */
 
             string[] ranges = range.Split(";");
             this.ranges = new double[ranges.Length][];
 
+            this.spm = new int[ranges.Length];
+
             for (int i = 0; i < ranges.Length; i++) {
 
-                string[] sRange = ranges[i].Split("-");
+                string r = ranges[i];
+                string[] sRangeProbability = r.Split("@");
+                if (sRangeProbability.Length > 1)
+                    spm[i] = int.Parse(sRangeProbability[1].Replace("%", ""));
+                else spm[i] = 100;
+
+                string[] sRange = sRangeProbability[0].Split("->");
                 if (sRange.Length < 2) {
 
-                    this.ranges[i] = new double[] {double.Parse(ranges[i]), double.Parse(ranges[i])};
+                    this.ranges[i] = new double[] {double.Parse(sRangeProbability[0]), double.Parse(sRangeProbability[0])};
                     continue;
 
                 }
@@ -51,11 +66,19 @@ namespace DragonQuest.Misc {
 
         private int[] GetRangeDifferenceMap() {
 
+            /*
+            
+                zraphy dont forget to add weighted probabilities, just simply multiply the range difference by the probability (like @10%), if theres no probability set, dont multiply it, just leave blud be
+                inshallah
+            
+            */
+
             int[] rangeDiffMap = new int[this.ranges.Length];
             for (int i = 0; i < this.ranges.Length; i++) {
 
-                int diff = (int) Math.Round(this.ranges[i][1] - this.ranges[i][0]);    
-                rangeDiffMap[i] = diff == 0 ? 1 : diff;
+                int diff = (int) Math.Round(this.ranges[i][1] - this.ranges[i][0]);
+                diff = diff == 0 ? 1 : diff;
+                rangeDiffMap[i] = diff * this.spm[i];
 
             }
 
@@ -97,20 +120,55 @@ namespace DragonQuest.Misc {
             double rangeMin = this.urm[randomRangeIndex][0],
                    rangeMax = this.urm[randomRangeIndex][1];
 
-            return new double[] {rangeMin, rangeMax}; 
+            return new double[] {rangeMin, rangeMax};
         
         }
 
-        public double GetDouble() {
+        private double GetRandomValueFromRange(double[] range) {
 
-            double[] randomRange = GetRandomRange();
-            double rangeDiff = randomRange[1] - randomRange[0];
-
-            return rangeDiff * new Random().NextDouble() + randomRange[0];
+            double rangeDiff = range[1] - range[0];
+            return rangeDiff * new Random().NextDouble() + range[0];
 
         }
 
-        public int GetInt() { return (int) Math.Round(GetDouble()); }
+        public double SingleProbabilisticDoubleSelection() {
+
+            double[] randomRange = GetRandomRange();
+            return GetRandomValueFromRange(randomRange);
+
+        }
+
+        public int SingleProbabilisticIntegerSelection() { return (int) Math.Round(SingleProbabilisticDoubleSelection()); }
+
+        public List<double> ProbabilisticDoubleSelection() {
+
+            List<double> selection = new List<double>();
+            for (int i = 0; i < this.ranges.Length; i++) {
+
+                double random = new Random().NextDouble();
+                if (random <= (double) this.spm[i] / 100.0) selection.Add(GetRandomValueFromRange(this.ranges[i]));
+                //Console.WriteLine("random = " + random + "\nthis.spm[i] / 100.0 = " + (double) this.spm[i] / 100.0);
+
+            }
+
+            return selection;
+
+        }
+
+        public List<int> ProbabilisticIntegerSelection() {
+
+            List<int> selection = new List<int>();
+            /*for (int i = 0; i < this.ranges.Length; i++) {
+
+                double random = new Random().NextDouble();
+                if (random <= this.spm[i] / 100) selection.Add((int) Math.Round(GetRandomValueFromRange(this.ranges[i])));
+
+            } THIS HERE IS WAAAAYYY TOO BISMILLAH, its good because its more efficient but i am a sigma and i do whatever it is thats on the lines below*/
+
+            foreach (double d in ProbabilisticDoubleSelection()) selection.Add((int) Math.Round(d));
+            return selection;
+
+        }
 
     }
 
