@@ -39,6 +39,8 @@ namespace DragonQuest.Misc {
 
         }
 
+        // Here we need a 
+
         // SetRenderableForm() -> this does shit with the RenderableEntity
 
     }

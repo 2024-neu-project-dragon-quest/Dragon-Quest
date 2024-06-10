@@ -33,6 +33,8 @@ namespace DragonQuest.Map {
         
         */
 
+        // Tick()
+
     }
 
 }

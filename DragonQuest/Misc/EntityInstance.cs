@@ -34,6 +34,16 @@ namespace DragonQuest.Misc {
 
         }
 
+        public void Tick() {
+
+            /*
+            
+                This function may be overridden by functions in classes inheritting this one.
+            
+            */
+
+        }
+
         public void Kill() {
 
             /*
